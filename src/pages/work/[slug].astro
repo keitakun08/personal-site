@@ -1,0 +1,43 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const workEntries = await getCollection('work');
+  return workEntries.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<Layout title={`${entry.data.title} | Work`}>
+  <section class="py-12 md:py-20">
+    <a href="/" class="text-sm text-gray-500 hover:text-brand-orange transition-colors">← Back to Work</a>
+
+    <h1 class="mt-6 text-4xl md:text-5xl font-bold text-brand-cobalt">
+      {entry.data.title}
+    </h1>
+
+    <div class="mt-4 flex flex-wrap items-center gap-4">
+      <span class="text-lg text-gray-600">{entry.data.year}</span>
+      <div class="flex flex-wrap gap-2">
+        {entry.data.tags.map((tag) => (
+          <span class="text-sm px-3 py-1 bg-gray-100 text-gray-600">{tag}</span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-8">
+    <article class="prose prose-lg max-w-none">
+      <p class="text-xl text-gray-600 lead">{entry.data.description}</p>
+      <div class="mt-8">
+        <Content />
+      </div>
+    </article>
+  </section>
+</Layout>

@@ -1,0 +1,42 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Contact | Personal Site">
+  <section class="py-12 md:py-20">
+    <h1 class="text-4xl md:text-5xl font-bold text-brand-cobalt">Contact</h1>
+    <p class="mt-4 text-lg text-gray-600 max-w-xl">
+      Let's connect. I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+    </p>
+  </section>
+
+  <section class="py-8">
+    <div class="grid-border p-6 md:p-8">
+      <h2 class="text-sm uppercase tracking-widest text-gray-500 mb-6">Get in touch</h2>
+
+      <div class="space-y-4">
+        <a
+          href="mailto:hello@example.com"
+          class="block text-lg hover-orange"
+        >
+          hello@example.com
+        </a>
+
+        <div class="pt-4">
+          <h3 class="text-sm font-medium text-gray-900 mb-3">Elsewhere</h3>
+          <ul class="space-y-2">
+            <li>
+              <a href="#" class="text-gray-600 hover:text-brand-orange transition-colors">GitHub</a>
+            </li>
+            <li>
+              <a href="#" class="text-gray-600 hover:text-brand-orange transition-colors">Twitter</a>
+            </li>
+            <li>
+              <a href="#" class="text-gray-600 hover:text-brand-orange transition-colors">LinkedIn</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
