@@ -1,64 +1,22 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
-
-const allWork = await getCollection('work');
-const allLog = await getCollection('log');
-
-const sortedWork = allWork.sort((a, b) => parseInt(b.data.year) - parseInt(a.data.year));
-const sortedLog = allLog.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
-const recentLogs = sortedLog.slice(0, 3);
 ---
 
-<Layout title="Work | Personal Site">
-  <!-- Hero Section -->
-  <section class="py-12 md:py-20">
-    <h1 class="text-4xl md:text-6xl font-bold text-brand-cobalt leading-tight">
-      I am Keita.
-    </h1>
-    <p class="mt-4 text-lg md:text-xl text-gray-600 max-w-xl">
-      A creative developer building thoughtful digital experiences. Currently focused on design systems and frontend architecture.
-    </p>
-  </section>
-
-  <!-- Work Section -->
-  <section class="py-8">
-    <h2 class="text-xs uppercase tracking-widest text-gray-500 mb-6">Selected Work</h2>
-    <div class="border-t border-gray-200">
-      {sortedWork.map((project) => (
-        <a
-          href={`/work/${project.slug}`}
-          class="block border-b border-gray-200 py-5 hover-orange group"
-        >
-          <div class="flex flex-col md:flex-row md:items-baseline md:justify-between">
-            <div>
-              <h3 class="text-lg font-medium text-gray-900 group-hover:text-brand-orange transition-colors">
-                {project.data.title}
-              </h3>
-              <p class="mt-1 text-sm text-gray-600">{project.data.description}</p>
-              <div class="flex flex-wrap gap-2 mt-3">
-                {project.data.tags.map((tag) => (
-                  <span class="text-xs px-2 py-1 bg-gray-100 text-gray-600">{tag}</span>
-                ))}
-              </div>
-            </div>
-            <span class="mt-2 md:mt-0 text-sm text-gray-500 font-medium">{project.data.year}</span>
-          </div>
-        </a>
-      ))}
-    </div>
-  </section>
-
-  <!-- Log Section -->
-  <section class="py-8">
-    <h2 class="text-xs uppercase tracking-widest text-gray-500 mb-6">Recent Updates</h2>
-    <div class="space-y-4">
-      {recentLogs.map((entry) => (
-        <div class="grid-border p-4 hover:border-brand-cobalt/30 transition-colors">
-          <time class="text-xs text-gray-500 uppercase tracking-wide">{entry.data.date}</time>
-          <p class="mt-2 text-gray-700">{entry.data.content}</p>
-        </div>
-      ))}
+<Layout
+  title="Keita Eriawan"
+  description="A personal portfolio and notebook by Keita Eriawan."
+  pageTheme="home"
+>
+  <section class="page-shell home-page" aria-labelledby="home-title">
+    <div class="home-copy">
+      <p class="lead">
+        <span class="hello">Hello.</span>
+        I’m <span class="name" id="home-title">Keita Eriawan</span>, a data practitioner building a small public notebook for projects, practical analysis, and useful decisions.
+      </p>
+      <p class="lead">
+        I’m interested in places where messy information is <span class="type-break">reshaping</span> how people work, learn, and make choices.
+      </p>
+      <p class="lead"><span class="marker">~/</span> It’s nice to meet you.</p>
     </div>
   </section>
 </Layout>
