@@ -2,35 +2,34 @@
 const currentPath = Astro.url.pathname;
 
 const navLinks = [
-  { href: '/', label: 'Work' },
-  { href: '/log', label: 'Log' },
-  { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Contact' },
+  { href: '/', label: 'Home', matches: ['/'] },
+  { href: '/project', label: 'Project', matches: ['/project', '/work'] },
+  { href: '/blog', label: 'Blog', matches: ['/blog', '/log'] },
+  { href: '/about', label: 'About', matches: ['/about', '/contact'] },
 ];
+
+const activeLink = navLinks.find((link) =>
+  link.matches.some((match) =>
+    match === '/' ? currentPath === '/' : currentPath.startsWith(match)
+  )
+);
 ---
 
-<nav class="grid-border border-x-0 border-t-0">
-  <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-    <a href="/" class="px-4 md:px-8 py-4 text-lg font-semibold text-brand-cobalt border-b md:border-b-0 md:border-r border-gray-200 block">
-      personal-site
-    </a>
-    <ul class="flex">
-      {navLinks.map((link) => (
-        <li>
-          <a
-            href={link.href}
-            class:list={[
-              'block px-4 md:px-6 py-4 text-sm uppercase tracking-wide transition-colors duration-200',
-              'border-r border-gray-200 last:border-r-0',
-              currentPath === link.href
-                ? 'text-brand-cobalt font-medium bg-brand-cobalt/5'
-                : 'hover:text-brand-cobalt hover:bg-gray-50'
-            ]}
-          >
-            {link.label}
-          </a>
-        </li>
-      ))}
-    </ul>
+<header class="site-header">
+  <nav class="site-nav" aria-label="Primary navigation">
+    {
+      navLinks.map((link) => (
+        <a
+          href={link.href}
+          aria-current={activeLink?.href === link.href ? 'page' : undefined}
+        >
+          {link.label}
+        </a>
+      ))
+    }
+  </nav>
+  <div class="site-status" aria-label="Local status">
+    <strong>00:22</strong>
+    <span>Good night</span>
   </div>
-</nav>
+</header>

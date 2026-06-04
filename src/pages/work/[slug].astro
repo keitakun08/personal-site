@@ -1,43 +1,48 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
   const workEntries = await getCollection('work');
-  return workEntries.map(entry => ({
-    params: { slug: entry.slug },
+  return workEntries.map((entry) => ({
+    params: { slug: entry.id },
     props: { entry },
   }));
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 ---
 
-<Layout title={`${entry.data.title} | Work`}>
-  <section class="py-12 md:py-20">
-    <a href="/" class="text-sm text-gray-500 hover:text-brand-orange transition-colors">← Back to Work</a>
+<Layout
+  title={`${entry.data.title} | Keita Eriawan`}
+  description={entry.data.description}
+  pageTheme="project"
+>
+  <section class="page-shell" aria-labelledby="project-detail-title">
+    <div class="page-grid">
+      <aside class="page-label">
+        <span>01</span>
+        <strong>Project</strong>
+        <a href="/project">Back to index</a>
+      </aside>
 
-    <h1 class="mt-6 text-4xl md:text-5xl font-bold text-brand-cobalt">
-      {entry.data.title}
-    </h1>
+      <article class="detail-card">
+        <a class="back-link" href="/project">Back to project</a>
+        <h1 id="project-detail-title">{entry.data.title}</h1>
+        <p>{entry.data.description}</p>
 
-    <div class="mt-4 flex flex-wrap items-center gap-4">
-      <span class="text-lg text-gray-600">{entry.data.year}</span>
-      <div class="flex flex-wrap gap-2">
-        {entry.data.tags.map((tag) => (
-          <span class="text-sm px-3 py-1 bg-gray-100 text-gray-600">{tag}</span>
-        ))}
-      </div>
+        <div class="tag-list">
+          <span class="tag">{entry.data.year}</span>
+          {entry.data.tags.map((tag) => <span class="tag">{tag}</span>)}
+        </div>
+
+        <div class="thumb" aria-hidden="true"></div>
+
+        <div class="content-body">
+          <Content />
+        </div>
+      </article>
     </div>
-  </section>
-
-  <section class="py-8">
-    <article class="prose prose-lg max-w-none">
-      <p class="text-xl text-gray-600 lead">{entry.data.description}</p>
-      <div class="mt-8">
-        <Content />
-      </div>
-    </article>
   </section>
 </Layout>

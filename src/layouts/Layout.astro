@@ -4,9 +4,15 @@ import Navigation from '../components/Navigation.astro';
 
 interface Props {
   title?: string;
+  description?: string;
+  pageTheme?: 'home' | 'project' | 'blog' | 'about';
 }
 
-const { title = 'Personal Site' } = Astro.props;
+const {
+  title = 'Keita Eriawan',
+  description = 'A personal portfolio and notebook by Keita Eriawan.',
+  pageTheme = 'home',
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -14,19 +20,21 @@ const { title = 'Personal Site' } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&display=swap"
+      rel="stylesheet"
+    />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
-  <body class="min-h-screen bg-brand-bg">
-    <div class="grid-border min-h-screen">
-      <Navigation />
-      <main class="px-4 md:px-8 py-8 md:py-12 max-w-4xl mx-auto">
-        <slot />
-      </main>
-    </div>
+  <body class={`${pageTheme}-theme`}>
+    <Navigation />
+    <main class="site-main">
+      <slot />
+    </main>
   </body>
 </html>
