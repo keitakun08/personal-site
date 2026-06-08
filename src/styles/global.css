@@ -286,34 +286,33 @@
   }
 
   .keyword-curiosity {
+    --orbit-radius: 3.25em;
+    position: relative;
     width: 5.3em;
-    color: var(--acid);
     font-size: .78em;
     font-style: italic;
   }
 
-  .keyword-curiosity span {
+  .curiosity-word {
     display: inline-block;
-    animation: curiosity-float 3.8s var(--ease) infinite alternate;
+    padding: 0 .12em;
+    color: color-mix(in srgb, var(--acid) 78%, white);
+    filter:
+      drop-shadow(0 0 .04em color-mix(in srgb, var(--acid) 82%, transparent))
+      drop-shadow(0 0 .2em color-mix(in srgb, var(--acid) 50%, transparent))
+      drop-shadow(0 0 .46em color-mix(in srgb, var(--acid) 24%, transparent));
   }
 
-  .keyword-curiosity span:nth-child(2n) {
-    animation-delay: -1.8s;
-  }
-
-  .keyword-curiosity span:nth-child(3n) {
-    animation-delay: -2.7s;
-  }
-
-  .keyword-curiosity span:nth-child(1),
-  .keyword-curiosity span:nth-child(5),
-  .keyword-curiosity span:nth-child(9) {
-    transform: translateY(.13em);
-  }
-
-  .keyword-curiosity span:nth-child(3),
-  .keyword-curiosity span:nth-child(7) {
-    transform: translateY(-.14em);
+  .curiosity-orbit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: .18em;
+    height: .18em;
+    border-radius: 50%;
+    background: var(--lilac);
+    box-shadow: 0 0 .18em color-mix(in srgb, var(--lilac) 70%, transparent);
+    animation: curiosity-orbit 4.2s linear infinite;
   }
 
   .page-grid {
@@ -562,21 +561,25 @@
     }
   }
 
-  @keyframes curiosity-float {
+  @keyframes curiosity-orbit {
     from {
-      translate: 0 -.02em;
+      transform: translate(-50%, -50%) rotate(0deg) translateX(var(--orbit-radius));
     }
 
     to {
-      translate: 0 .1em;
+      transform: translate(-50%, -50%) rotate(360deg) translateX(var(--orbit-radius));
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .keyword-data span,
     .code-cursor,
-    .keyword-curiosity span {
+    .curiosity-orbit {
       animation: none;
+    }
+
+    .curiosity-orbit {
+      transform: translate(3em, -1.1em);
     }
   }
 
@@ -602,9 +605,13 @@
       overflow: visible;
     }
 
-    .keyword-data span:nth-child(n),
-    .keyword-curiosity span:nth-child(n) {
+    .keyword-data span:nth-child(n) {
       transform: translateY(0);
+    }
+
+    .keyword-curiosity {
+      --orbit-radius: 2.8em;
+      width: 5em;
     }
 
     .page-grid,
