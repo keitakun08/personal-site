@@ -196,9 +196,7 @@
     display: grid;
     align-items: center;
     width: min(760px, calc(100% - 48px));
-    height: 100vh;
     min-height: 640px;
-    overflow: hidden;
   }
 
   .home-copy {
