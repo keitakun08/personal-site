@@ -226,24 +226,6 @@
     font-style: italic;
   }
 
-  .type-break {
-    display: inline-block;
-    margin: 0 8px;
-    color: var(--lilac);
-    font-family: var(--mono);
-    font-size: .46em;
-    font-weight: 500;
-    letter-spacing: .06em;
-    text-transform: uppercase;
-    transform: translateY(-.22em);
-  }
-
-  .marker {
-    color: var(--acid);
-    font-family: var(--mono);
-    font-size: .62em;
-  }
-
   .page-grid {
     display: grid;
     grid-template-columns: 240px minmax(0, 1fr);
