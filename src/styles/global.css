@@ -66,10 +66,6 @@
     --grain-opacity: .82;
   }
 
-  body.home-theme {
-    overflow: hidden;
-  }
-
   body.project-theme {
     --page-bg: var(--paper);
     --page-fg: var(--ink);
