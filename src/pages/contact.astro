@@ -2,40 +2,38 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Contact | Personal Site">
-  <section class="py-12 md:py-20">
-    <h1 class="text-4xl md:text-5xl font-bold text-brand-cobalt">Contact</h1>
-    <p class="mt-4 text-lg text-gray-600 max-w-xl">
-      Let's connect. I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
-    </p>
-  </section>
+<Layout
+  title="Contact | Keita Eriawan"
+  description="Contact Keita Eriawan."
+  pageTheme="about"
+>
+  <section class="page-shell" aria-labelledby="contact-title">
+    <div class="page-grid">
+      <aside class="page-label">
+        <span>04</span>
+        <strong id="contact-title">Contact</strong>
+        <span>Legacy route</span>
+      </aside>
 
-  <section class="py-8">
-    <div class="grid-border p-6 md:p-8">
-      <h2 class="text-sm uppercase tracking-widest text-gray-500 mb-6">Get in touch</h2>
+      <div class="about-layout">
+        <article class="about-panel">
+          <h1>Let’s connect.</h1>
+          <p>
+            This route is kept for old links. The main site now keeps contact details
+            inside the About page.
+          </p>
+        </article>
 
-      <div class="space-y-4">
-        <a
-          href="mailto:hello@example.com"
-          class="block text-lg hover-orange"
-        >
-          hello@example.com
-        </a>
-
-        <div class="pt-4">
-          <h3 class="text-sm font-medium text-gray-900 mb-3">Elsewhere</h3>
-          <ul class="space-y-2">
-            <li>
-              <a href="#" class="text-gray-600 hover:text-brand-orange transition-colors">GitHub</a>
-            </li>
-            <li>
-              <a href="#" class="text-gray-600 hover:text-brand-orange transition-colors">Twitter</a>
-            </li>
-            <li>
-              <a href="#" class="text-gray-600 hover:text-brand-orange transition-colors">LinkedIn</a>
-            </li>
-          </ul>
-        </div>
+        <article class="about-panel">
+          <div class="meta">
+            <span>Email</span>
+            <span>Open</span>
+          </div>
+          <p>
+            Replace this temporary address with the email or profile link you want visitors to use.
+          </p>
+          <a class="contact-pill" href="mailto:hello@example.com">Email me</a>
+        </article>
       </div>
     </div>
   </section>

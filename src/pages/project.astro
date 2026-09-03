@@ -1,0 +1,61 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allWork = await getCollection('work');
+const sortedWork = allWork.sort((a, b) => parseInt(b.data.year) - parseInt(a.data.year));
+const [featuredProject, ...otherProjects] = sortedWork;
+---
+
+<Layout
+  title="Project | Keita Eriawan"
+  description="Selected projects and portfolio work by Keita Eriawan."
+  pageTheme="project"
+>
+  <section class="page-shell" aria-labelledby="project-title">
+    <div class="page-grid">
+      <aside class="page-label">
+        <span>01</span>
+        <strong id="project-title">Project</strong>
+        <span>Selected work</span>
+      </aside>
+
+      <div class="project-layout">
+        {
+          featuredProject && (
+            <a class="work-card" href={`/work/${featuredProject.id}`}>
+              <div class="meta">
+                <span>Featured</span>
+                <span>{featuredProject.data.year}</span>
+              </div>
+              <div>
+                <h2>{featuredProject.data.title}</h2>
+                <p>{featuredProject.data.description}</p>
+              </div>
+              <div>
+                <div class="tag-list">
+                  {featuredProject.data.tags.map((tag) => <span class="tag">{tag}</span>)}
+                </div>
+                <div class="thumb" aria-hidden="true"></div>
+              </div>
+            </a>
+          )
+        }
+
+        <div class="work-stack">
+          {
+            otherProjects.map((project) => (
+              <a class="work-card secondary" href={`/work/${project.id}`}>
+                <div class="meta">
+                  <span>{project.data.tags[0] ?? 'Project'}</span>
+                  <span>{project.data.year}</span>
+                </div>
+                <h2>{project.data.title}</h2>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

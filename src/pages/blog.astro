@@ -1,0 +1,35 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allLog = await getCollection('log');
+const sortedLog = allLog.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+---
+
+<Layout
+  title="Blog | Keita Eriawan"
+  description="Notes and short writing by Keita Eriawan."
+  pageTheme="blog"
+>
+  <section class="page-shell" aria-labelledby="blog-title">
+    <div class="page-grid">
+      <aside class="page-label">
+        <span>02</span>
+        <strong id="blog-title">Blog</strong>
+        <span>Notes index</span>
+      </aside>
+
+      <div class="blog-list">
+        {
+          sortedLog.map((entry) => (
+            <article class="note-row">
+              <span>Note</span>
+              <strong>{entry.data.content}</strong>
+              <time datetime={entry.data.date}>{new Date(entry.data.date).getFullYear()}</time>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Layout>
